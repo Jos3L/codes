@@ -10,7 +10,7 @@ public class DVD2Collection2 {
       while (menuChoice != 5) {
          switch(menuChoice) {
             case 1:
-               position = addDVD2(collection, position);
+               addDVD2(collection, position);
                break;
                
             case 2:
@@ -22,7 +22,7 @@ public class DVD2Collection2 {
                break;
             
             case 4:
-               position = removeDVD(collection, position);   
+               removeDVD(collection, position);   
                break;
             default:
                // Program should never reach this condition if logic is correct
@@ -43,7 +43,7 @@ public class DVD2Collection2 {
       return dvdList;
    }   
    
-   public static int removeDVD(DVD2[] collection, int position){
+   public static void removeDVD(DVD2[] collection, int position){
       String selectDVD = JOptionPane.showInputDialog("Select any DVD that have been added: \nChose one of the following: "+getList(collection));
       int dvdIndex = -1;
       for(int x=0; x < DVD2.getNumDVD2s(); x++){
@@ -51,21 +51,26 @@ public class DVD2Collection2 {
             dvdIndex = x;
          }
       }
+      int nextIndex = dvdIndex +1; //adding + 1 to in
       if(dvdIndex != -1){
-         JOptionPane.showMessageDialog(null, dvdIndex);
+         JOptionPane.showMessageDialog(null, dvdIndex);// print index
+         collection[dvdIndex] = null; // delete on dvdIndex position  
+         
+         if(nextIndex < collection.length()) { //verifying is not the last index 
+         do {
+         collection[dvdIndex] = collection[nextIndex];
+  
+         dvdIndex++;
+         nextIndex++;
+         }
+         while(nextIndex < collection.length());
+      }
       }
       else{
          JOptionPane.showMessageDialog(null,"no orders found");
       }
-            int index = dvdIndex;
-            //Check to make sure the delete is valid!
-            if (index >= 0 && index < position){
-               for(int y = index; y < position - 1; y++){
-                  collection[y] = collection[y+1];
-               }
-               --position;
-            }      
-      return position;   
+    
+ 
    }
    
    public static int addDVD2(DVD2[] collection, int position) {
