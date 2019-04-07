@@ -1,4 +1,5 @@
 import javax.swing.JOptionPane;
+// problem
 
 public class DVD2Collection2 {
    public static void main(String[] args) {
@@ -30,14 +31,18 @@ public class DVD2Collection2 {
          }
          menuChoice = getMenuOption();
       }
-   }
-   
+    }
    public static String getList(DVD2[] collection){
       String dvdList = "";
-		for (int x = 0; x < DVD2.getNumDVD2s(); x++) {
-			dvdList += "\n" + collection[x].getTitle();
-         if (x < collection.length - 1) {
+        for (int x = 0; x < DVD2.getNumDVD2s(); x++) {
+            if(collection[x] !=null){
+            System.out.println("Inside of getList(): "+collection[x]);
+            dvdList += "\n" + collection[x].getTitle();
+            }
+           if(collection[x] !=null){
+           if (x < collection.length - 1) {
             dvdList += ", ";
+           }
          }         
       }
       return dvdList;
@@ -56,20 +61,19 @@ public class DVD2Collection2 {
          JOptionPane.showMessageDialog(null, dvdIndex);// print index
          collection[dvdIndex] = null; // delete on dvdIndex position  
          
-         if(nextIndex < collection.length()) { //verifying is not the last index 
+         if(nextIndex < collection.length) { //verifying is not the last index 
          do {
          collection[dvdIndex] = collection[nextIndex];
-  
          dvdIndex++;
          nextIndex++;
          }
-         while(nextIndex < collection.length());
+         while(nextIndex < collection.length);
       }
       }
       else{
          JOptionPane.showMessageDialog(null,"no orders found");
       }
-    
+      System.out.println("THIS IS THE ARRAY: \n"+collection[dvdIndex]);
  
    }
    
@@ -102,7 +106,10 @@ public class DVD2Collection2 {
       String output = "";
       
       for (int x = 0; x < DVD2.getNumDVD2s(); x++) {
+         if(collection[x] != null){
+         System.out.println("Inside of printDvDCollection2: "+collection[x]);
          output += collection[x].toString() + "\n";
+        }
       }
       
       JOptionPane.showMessageDialog(null, output);
